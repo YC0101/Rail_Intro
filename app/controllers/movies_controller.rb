@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
     if session[:ratings]
       @ratings_to_show = session[:ratings]
     end
+
     #sort
     if params[:sort]
       @sort = params[:sort]
@@ -35,7 +36,6 @@ class MoviesController < ApplicationController
       end
     end
 
-
     if @sort == '' 
       @movies = Movie.with_ratings @ratings_to_show.keys
     else
@@ -44,7 +44,7 @@ class MoviesController < ApplicationController
     #@movies = Movie.all
 
     if !(params.has_key?(:ratings) && params.has_key?(:sort))
-      redirect_to movie_path(:ratings=>@ratings_to_show,:sort=>@sort)
+      redirect_to movies_path(:ratings=>@ratings_to_show,:sort=>@sort)
     end
     
   end
