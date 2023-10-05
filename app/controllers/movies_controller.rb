@@ -42,6 +42,10 @@ class MoviesController < ApplicationController
       @movies = Movie.with_ratings(@ratings_to_show.keys).order(@sort + ' asc')
     end
     #@movies = Movie.all
+
+    if !(params.has_key?(:ratings) && params.has_key?(:sort))
+      redirect_to movie_path(:ratings=>@ratings_to_show,:sort=>@sort)
+    end
     
   end
 
