@@ -1,7 +1,7 @@
 class Movie < ActiveRecord::Base
   #Movie.all_ratings to return all possible values.
   def self.all_ratings
-    return self.find(:all, :select => "rating", :group => "rating").map(&:rating)
+    self.find(:all, :select => "rating", :group => "rating").map(&:rating)
   end
 
   def self.with_ratings(ratings_list)
