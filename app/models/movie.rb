@@ -11,4 +11,6 @@ class Movie < ActiveRecord::Base
     if ratings_list.nil?
       return Movie.all
     end
+  end
+
 end
