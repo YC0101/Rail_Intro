@@ -2,6 +2,7 @@ class MoviesController < ApplicationController
   #Part 1 Requirment 1
   def initialize
     @all_ratings = Movie.all_ratings
+    super
   end
 
   def show
