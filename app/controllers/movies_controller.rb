@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
   #Part 1 Requirment 1
   def initialize
     @all_ratings = Movie.all_ratings
-    @ratings_to_show = Array.new()
+    #@ratings_to_show = Array.new()
     super
   end
 
@@ -13,8 +13,35 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
-    #@all_ratings = ['G', 'PG', 'PG-13', 'R']
+    #ratings
+    if params[:ratings]
+      @ratings_to_show = params[:ratings]
+    else
+      @ratings_to_show = @all_ratings.map{|r| [r,1]}.to_h
+    end
+
+    if session[:ratings]
+      @ratings_to_show = session[:ratings]
+    end
+    #sort
+    if params[:sort]
+      @sort = params[:sort]
+    else
+      if session[:sort] 
+        @sort = session[:sort]
+      else
+        @sort = ''
+        session[:sort] = ''
+      end
+    end
+
+
+    if @sort == '' 
+      @movies = Movie.with_ratings @ratings_to_show.keys
+    else
+      @movies = Movie.with_ratings(@ratings_to_show.keys).order(@sort + ' asc')
+    end
+    #@movies = Movie.all
     
   end
 
