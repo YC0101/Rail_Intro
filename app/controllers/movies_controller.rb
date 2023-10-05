@@ -2,6 +2,7 @@ class MoviesController < ApplicationController
   #Part 1 Requirment 1
   def initialize
     @all_ratings = Movie.all_ratings
+    @ratings_to_show = Array.new()
     super
   end
 
@@ -14,6 +15,7 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
     #@all_ratings = ['G', 'PG', 'PG-13', 'R']
+    
   end
 
   def new
