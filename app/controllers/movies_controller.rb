@@ -20,6 +20,10 @@ class MoviesController < ApplicationController
       @ratings_to_show = @all_ratings.map{|r| [r,1]}.to_h
     end
 
+    if params[:commit] == 'Refresh'
+      session[:ratings] = @ratings_to_show
+    end
+
     if session[:ratings]
       @ratings_to_show = session[:ratings]
     end
